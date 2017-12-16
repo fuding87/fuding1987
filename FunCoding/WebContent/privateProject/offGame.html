@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Implement</title>
+
+<script type="text/javascript">
+var CountValue = 1;
+var btnCount = 1; 
+var string = "";
+string += 	"<form>";
+string += 	"<table border='1' align='center'> ";
+string += 	"<tr>";
+string += 	"<td>";
+string += 	"<input type='text' id='Count' value='Count' readonly='readonly' style='width:40px;' />"
+string += 	"</td>";
+string += 	"<td>";
+string +=	"<input type='text' id='CountValue' value='" + CountValue + "' readonly='readonly' style='width:80px;' />"
+string += 	"</td>";
+string += 	"<td>";
+string +=	"<input type='button' id='reGame' value='ReGame' readonly='readonly' style='width:80px;' onclick='reloadPage();' />"
+string += 	"</td>";
+string += 	"</tr>";
+string += 	"</table><br/>";
+
+string += 	"<table border='1' align='center'> ";
+for (var i=1; i<=5; i++){
+	var k=1;
+	string += "<tr>";
+	for(var k=1; k<=5; k++){
+			string += 	"<td>";
+			string += 	"<input type='button' style='background-color: yellow; width:75px; height:75px;' " +
+						"id='btn" + btnCount + "' onclick='selectBtn(" + btnCount + ");'/>"
+			btnCount++;
+			string += 	"</td>";	
+	}
+	string += "</tr>";
+}
+string += 	"</table>";
+string += 	"</form>";
+
+document.write(string);
+
+function reloadPage(){
+	location.reload();
+}
+
+function selectBtn(number){
+	
+	// 클릭횟수 +
+	CountValue += 1;
+	document.getElementById("CountValue").value = CountValue;
+	
+	numA = new Array();
+
+	//number 값이 테두리면
+	if (number == 1){			// 왼쪽 윗면 없음
+		numA[1] = number;
+		numA[2] = number+5;
+		numA[3] = number+1;
+	} else if(number == 5) {	// 오른쪽 윗면 없음
+		numA[1] = number;
+		numA[2] = number+5;
+		numA[3] = number-1;
+	} else if(number == 21) {	// 왼쪽 아랫면 없음
+		numA[1] = number;
+		numA[2] = number-5;
+		numA[3] = number+1;
+	} else if(number == 25) { 	// 오른쪽 아랫면 없음
+		numA[1] = number;
+		numA[2] = number-5;
+		numA[3] = number-1;
+	} else if(number<=5) { 		// 윗면 없음
+		numA[1] = number;
+		numA[2] = number+5;
+		numA[3] = number+1;
+		numA[4] = number-1;
+	} else if(number%5 == 1) { 	// 왼쪽 없음
+		numA[1] = number;
+		numA[2] = number-5;
+		numA[3] = number+5;
+		numA[4] = number+1;
+	} else if(number%5 == 0) {	// 오른쪽 없음
+		numA[1] = number;
+		numA[2] = number-5;
+		numA[3] = number+5;
+		numA[4] = number-1;
+	} else if(number>=21 && number<=25) { // 아랫면 없음
+		numA[1] = number;
+		numA[2] = number-5;
+		numA[3] = number-1;
+		numA[4] = number+1;
+	} else { 					// 사방 다 있음
+		numA[1] = number;
+		numA[2] = number+5;
+		numA[3] = number-5;
+		numA[4] = number+1;
+		numA[5] = number-1;
+	}
+	
+	changeColor(numA);
+}
+
+function changeColor(numA){
+	
+	idArray = new Array();
+	
+	// index[0]을 있다고 치네 그래서 -1해줌
+	max = numA.length-1;
+
+	for (var k=1; k<=max; k++){
+		idArray[k] = "btn" + numA[k]; 
+	}
+
+	for (var i=1; i<=max; i++){
+		btn = document.getElementById(idArray[i])
+		if (btn.style.backgroundColor=="yellow"){
+			btn.style.backgroundColor = "red";
+		} else {
+			btn.style.backgroundColor = "yellow";
+		}
+	}
+	
+}
+
+function initColor(){
+	//2	3	5	6	7	8	12	14	15	21	22
+	//2	3 	5 	6 	7 	13 	15 	18 	21 	22
+
+	numAr = new Array();
+	numAr[1] = 2;
+	numAr[2] = 3;
+	numAr[3] = 5;
+	numAr[4] = 6;
+	numAr[5] = 7;
+	numAr[6] = 13;
+	numAr[7] = 15;
+	numAr[8] = 18;
+	numAr[9] = 21;
+	numAr[10] = 22;
+	
+	changeColor(numAr);
+	
+}
+
+// 처음에 빨간색으로 시작
+initColor();
+
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

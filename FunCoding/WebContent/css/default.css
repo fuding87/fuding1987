@@ -1,0 +1,243 @@
+@CHARSET "UTF-8";
+
+#logHeader{height: 30px;margin: 0px;padding: 0px}
+#mainHeader{height: 160px;margin: 0px;padding: 0px}
+
+/* 로고 슬라이드 위해서 삽입 */
+#logo_img {
+/* 	background-color: yellow; */
+	width: 600px;
+	height: 150px;
+	margin: 0 auto;
+}
+
+#logoslider {
+	/* background-color: red; */
+	width: 600px;
+	height: 150px;	
+	position: relative;
+	overflow: hidden;
+}
+
+#logosliderContent{
+	width: 600px;	
+	list-style: none;
+	position: absolute;
+	top: 0;
+	margin: 0;
+	padding: 0;
+}
+.logosliderImage{
+	float: left;  
+    position: relative;  
+    display: none;
+}
+
+/* main imag 슬라이드 위해서 삽입 */
+#main_img {
+	margin:0 auto;
+ 	background-color: #00ffff;
+ 	border-radius:10px;
+	width: 940px;
+	height: 200px;
+}
+
+#main_img img {
+	border-radius :10px;
+}  
+
+#s3slider {
+	/* background-color: red; */
+	width: 971px;
+	height: 219px;	
+	position: relative;
+	overflow: hidden;
+}
+#s3sliderContent {
+	/* background-color:blue; */
+	width: 971px;	
+	list-style: none;
+	position: absolute;
+	top: 0;
+	margin: 0;
+	padding: 0;
+}
+.s3sliderImage {
+    float: left;  
+    position: relative;  
+    display: none; 
+}
+
+#iconBoard{border: solid 1px #FFFFFF;
+	border-radius:10px ; width: 910px; min-height: 25px;
+	background-color: #c0c0c0; padding: 5px;
+	margin: 0 auto;
+	word-spacing: 100px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#iconBoard img{
+	border-radius:5px;
+	margin-left: 10.5px;
+	/* 아이콘간의 간격 */
+}
+
+body {
+	background-color: #898989; margin: 0px;
+	padding: 0px; font-size: 0.75em;
+	line-height: 1.2em; color: #333;
+}/*배경색 #898989 밖여백 0 안여백 0 글자크기 0.75em
+줄간격 1.2em 글자색 #333*/
+
+#wrap{
+	width: 971px; text-align: left;
+	margin: 0;margin-right: auto;margin-left: auto;
+	min-height: 780px;
+	background-image: url("../images/shadow.png");
+	background-repeat: repeat-y;
+}/*너비 : 971px 글자정렬 left 밖여백 0 
+밖오른쪽여백 auto 밖왼쪽여백 auto  최소높이 780px
+배경이미지 shadow.png 배경이미지반복 y*/
+
+#login{float: right;margin: 10px 64px 0 0;
+font-family: Arial,Helvetica,sans-serif;
+font-size: 12px;word-spacing: 5px;
+height: 30px;
+width: 820px;
+margin-right: -80px;
+}
+/*정렬 오른쪽 밖여백 20 64 0 0  
+글자체 Arial,Helvetica,sans-serif 크기 12px 
+단어간격 5px*/
+#login hr{
+	width: 920px;
+	margin: 3px 0 0 20px;
+	border-style: dotted;
+	size: 1px;
+	margin-left: -210px;
+	border-color: green;
+	}
+/*너비 900px 밖여백 0 0 0 20px*/
+/* 로그인 비밀번호 입력칸 */
+#login #loginId {width:150px;}
+#login #loginPass {width:100px;}
+
+#login a{text-decoration: none; color: #333}
+/* 하이퍼링크 밑줄 없음 글자색 #333*/
+#login a:hover{color: #F90}
+/* 하이퍼링크 hover 글자색 #F90*/
+.clear{clear: both;}/*영역구분*/
+
+/*footer부분*/
+footer {height: 80px}
+
+footer hr{width: 920px;margin: 0 0 0 20px}
+/*너비 900px 밖여백 0 0 0 20px*/
+
+footer #copy{
+	font-family: seo; width: 450px;
+	margin: 3px 0 0 210px; float: left;
+	margin-top:-60px;}
+/*글자체 seo 너비 450px 밖여백 20px 0 0  190px 정렬 left*/
+
+footer #searchEngineIcon {
+	margin-left:600px;
+	margin-top:-60px;
+	word-spacing: 10px;
+}
+footer #searchEngineIcon img{
+	border-radius: 50px;
+}
+
+footer #searchEngineIcon a{
+	/* a tag 때문에 약간의 줄이생기더라
+	a tag 기본 효과 마우스커서 변경이용하기 위해서 
+	아래와 같이 편법 사용 */
+	color: white;
+}
+
+footer #enhanceText{
+	color: blue;
+	font-weight: 900;
+}
+
+#reg_wrap_main_th{
+	margin: 0 10px 8px 0;
+	font-size: 120%;
+	font-weight: 900;
+	color: #0000ff;
+}
+
+#reg_wrap_main{
+	margin-left: 260px;
+}
+
+#reg_wrap_main_reg_h1 {
+	margin-left: 185px;
+	color: #0080ff;
+}
+
+#reg_wrap_img_register {
+	background: url("../images/register.png");
+	width:500px;
+	height:250px;
+	background-repeat: no-repeat;
+	margin-top : 10px;
+	padding-top: 10px;
+	border-radius:10px;
+}
+
+#reg_wrap_main_modify_h1{
+	margin-left: 145px;
+	color: #0080ff;
+}
+
+#reg_wrap_img_modify {
+	background: url("../images/modify.png");
+	width:500px;
+	height:250px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	margin-top : 10px;
+	padding-top: 10px;
+	border-radius:10px;
+}
+#reg_wrap_main #idCheck{
+	margin-left: -50px; 
+}
+
+#loginId ,#loginPass {
+	margin-top: -5px;
+}
+
+#nickPosition {
+	width: 200px;
+	color: blue;
+	font-weight: 900;
+	margin-left: -205px;
+	font-size: 150%;
+}
+.atag{
+	text-decoration: none;
+}
+.aTag:hover{color: #F90}
+
+#previewBoard_back{
+	width: 370px;
+	margin : 0 30px 0 0;
+	height : 30px;
+	background-image: url("../images/back.jpg");
+	background-repeat: no-repeat;
+	padding: 7px 0 0 30px;
+}
+#previewMargin{
+	padding:0 0 15px 15px;
+}
+
+#previewContxt td{
+	padding: 6px 4px;
+    border-bottom-width: 1px;
+    border-bottom-style: dotted;
+    border-bottom-color: #999;
+}

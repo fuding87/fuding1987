@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<style type="text/css">
+
+#mainTable {
+	width : 450px;
+	height : 450px;
+/*    	background-image: url("./images/gogamebackground2.png");
+   	background-repeat: no-repeat;
+   	background-size: 12cm; */
+}
+
+</style>
+
+<script type="text/javascript">
+var btnCount  = 1; 
+var string = "";
+// 선수 변경을 위한 count
+var clickCount = 0;
+// 한수 봐주기 위한 마지막 button 변수로 저장
+var latestClickBtn;
+
+//새로 돌을 두면 back 할수 있게끔 // 연속으로 back못하게 막음
+var isBackToNot = false;
+
+string += 	"<form>";
+string += 	"<table id='Title'> ";
+string += 	"<h1 align='center'>Omok Game!</h1>";
+string += 	"<table align='center'> ";
+string += 	"<tr>";
+string += 	"<td>";
+string +=	"<input type='button' id='reGame' value='ReGame' style='width:80px;' onclick='reloadPage();' />"
+string += 	"</td>";
+string += 	"<td>";
+string +=	"<input type='button' id='reGame' value='한수 물려주기' style='width:100px;' onclick='backTo();' />"
+string += 	"</td>";
+string += 	"</tr>";
+string += 	"</table>";
+
+string += 	"<table id='mainTable' align='center'> ";
+row = 12;
+col = 12;
+for (var i=1; i<=row; i++){
+	var k=1;
+	string += "<tr>";
+	for(var k=1; k<=col; k++){
+			string += 	"<td>";
+			string += 	"<input type='button' style='background-color: white; width:20px; height:20px;'" +
+							"id='btn" + btnCount + "' onclick='selectBtn(" + btnCount + ");'/>"
+			btnCount++;
+			string += 	"</td>";	
+	}
+	string += "</tr>";
+}
+
+string += 	"</table>";
+string += 	"</form>";
+
+document.write(string);
+
+function reloadPage(){
+	location.reload();
+}
+
+function backTo(){
+	
+	// 변수로 저장한 버튼 하나 색변경해주고 clickCount 내려줄것
+	if (clickCount<1){
+		alert("한수 물릴게 없습니다.");
+	}else{
+		if (isBackToNot){
+			alert("적당히 물리세요, 더럽네요");
+		} else {
+			clickCount--;
+			latestClickBtn.style.backgroundColor = "white";
+			isBackToNot = true; 
+		}
+	}
+}
+
+function selectBtn(btnNum){
+	
+	isBackToNot = false;
+	
+	btn = "btn" + btnNum;
+	btnId = document.getElementById(btn);
+	if (btnId.style.backgroundColor == "black" || 
+		btnId.style.backgroundColor == "red"){// 이미 색이 칠해져있으면 
+		
+		alert("다른거 누르세요");	
+		return;
+		
+	}
+	
+	clickCount++;
+	
+	if(clickCount%2 == 1){ // 첫번째 공격 하는 사람 = 검정
+		btnId.style.backgroundColor = "black";
+	} else { // 두번째 공격하는 사람 = 빨강
+		btnId.style.backgroundColor = "red";
+	}
+	
+	// 오목완성 체크
+	checkToSuccedFive(btnNum);
+
+	// 한수 물리기 위해서 버튼 저장
+	latestClickBtn = btnId
+}
+
+function checkToSuccedFive(btnNum){
+	// btnNum 기준으로 8 방위가 5개 연속으로 있는지 확인 할 것 
+	// (선택한 것 기준으로 9개를 비교 , 색깔 칠해졌는지 비교해서 연속적으로 칠해졌으면 )
+	
+	// 	오른쪽, 왼쪽	: 	btnNum - 4, 			btnNum - 3, 			btnNum - 2, 			btnNum - 1, 			btnNum, 
+	//					btnNum + 1, 			btnNum + 2, 			btnNum + 3, 			btnNum + 4
+	leftRightArr 	= [btnNum - 4,btnNum - 3,btnNum - 2,btnNum - 1,btnNum,btnNum + 1,btnNum + 2,btnNum + 3,btnNum + 4];
+// 	for(i=0; i<9; i++){
+// 		alert(leftRightArr[i]);
+// 	}
+	// 	위쪽, 아랫쪽	: 	btnNum - (row*4), 		btnNum - (row*3), 		btnNum - (row*2), 		btnNum - (row*1), 		btnNum, 
+	//					btnNum + (row*1), 		btnNum + (row*2), 		btnNum + (row*3), 		btnNum + (row*4)
+	downUpArr 		= [btnNum - (row*4),btnNum - (row*3), btnNum - (row*2), btnNum - (row*1),btnNum,
+						btnNum + (row*1), btnNum + (row*2), btnNum + (row*3),	btnNum + (row*4)];
+// 	for(i=0; i<9; i++){
+// 		alert(downUpArr[i]);
+// 	}
+	// 	상좌쪽, 하우족	:  	btnNum - (row*4)-4,		btnNum - (row*3)-3,		btnNum - (row*2)-2,		btnNum - (row*1)-1,		btnNum, 
+	//					btnNum + (row*1)+1, 	btnNum + (row*2)+2, 	btnNum + (row*3)+3, 	btnNum + (row*4)+4
+	dlurArr 		= [btnNum - (row*4)-4,btnNum - (row*3)-3,btnNum - (row*2)-2,btnNum - (row*1)-1,btnNum, 
+						btnNum + (row*1)+1,btnNum + (row*2)+2,btnNum + (row*3)+3,btnNum + (row*4)+4];
+// 	for(i=0; i<9; i++){
+// 		alert(dlurArr[i]);
+// 	}
+	// 	상우쪽, 하좌쪽 	:	btnNum - (row*4)+4, 	btnNum - (row*3)+3, 	btnNum - (row*2)+2, 	btnNum - (row*1)+1, 	btnNum, 
+	//					btnNum + (row*1)-1, 	btnNum + (row*2)-2, 	btnNum + (row*3)-3, 	btnNum + (row*4)-4
+	drulArr 		= [btnNum - (row*4)+4,btnNum - (row*3)+3,btnNum - (row*2)+2,btnNum - (row*1)+1,btnNum, 
+						btnNum + (row*1)-1,btnNum + (row*2)-2,btnNum + (row*3)-3,btnNum + (row*4)-4];
+// 	for(i=0; i<9; i++){
+// 		alert(drulArr[i]);
+// 	}
+	// 위 4가지 기준으로 체크 할 것
+	totalArr = [leftRightArr, downUpArr, dlurArr, drulArr];
+	
+	fiveCount = 0;
+	
+	// 현재 돌 색깔
+	color = (clickCount-1)%2==1? "red":"black";
+	
+	// 현재 몇째줄인지
+	rowNum = rowNumMethod(btnNum);
+	
+	for (i=0; i<4; i++){
+		isBreak = false;
+
+		for (k=0; k<totalArr[i].length; k++){
+
+			btnNumber = "btn" + totalArr[i][k];
+			// 0보다 작거나, 맥스값보다 크면 없는값이니깐 스킵
+			if (totalArr[i][k]<1 || totalArr[i][k]>row*col){
+				continue;
+			}
+			
+			// i가 0일때(좌우일때) 추가로 들어있어야할 로직
+			// rowNum*row = 그줄의 최대값
+			// ((rowNum-1)*row)+1 = 그줄의 최소값
+			// 범위 안에 없으면 continue;
+			if ((totalArr[i][k]>rowNum*row || totalArr[i][k]<((rowNum-1)*row)+1) && i==0){
+				fiveCount=0;
+				continue;
+			}
+			
+ 			// 대각선일때 i==2, i==3 일때
+			if (i==2 || i==3){
+				inRowNum = rowNumMethod(totalArr[i][k]);
+				// 현재 Row 값에서 비교 , 대각선이 전부 위에서 내려온다 작은값에서 큰값으로 
+				if (rowNum-4+k != inRowNum){
+					fiveCount=0;
+					continue;
+				} 
+			} 
+			
+			btnIdIn = document.getElementById(btnNumber);
+			if (btnIdIn.style.backgroundColor == color){
+				fiveCount++;
+			} else {
+				fiveCount=0;
+				continue;
+			}
+
+			if (fiveCount==5){
+				if ((clickCount-1)%2==1){
+					alert("빨간돌이 승리 했습니다.");
+				} else {
+					alert("검정돌이 승리 했습니다.");
+				}
+				isBreak = true;
+				break;
+			}
+		}
+		// fiveCount 5 됐으면 더할필요없으니 retrun
+		if(isBreak){
+			break;
+		}
+		// count 초기화
+		fiveCount = 0;
+	}
+}
+
+function rowNumMethod(num){
+	result = 0;
+	if ((num%12)==0){
+		result = num/12;
+	} else {
+		result = Math.floor(num/12) + 1;	
+	}	
+	return result;
+}
+
+</script>
+
+
+<title>Omok Game</title>
+</head>
+<body>
+
+
+</body>
+</html>
